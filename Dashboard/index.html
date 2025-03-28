@@ -1,5 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Intelligence Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.3.1/dist/chartjs-adapter-luxon.min.js"></script>
+</head>
+
+<body class="dark-theme">
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h3>Market Intel</h3>
+                <button id="sidebar-toggle" class="btn"><i class="bi bi-list"></i></button>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active"><a href="#dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+                <li><a href="#crypto"><i class="bi bi-currency-bitcoin"></i> Crypto</a></li>
+                <li><a href="#forex"><i class="bi bi-currency-exchange"></i> Forex</a></li>
+                <li><a href="#stocks"><i class="bi bi-graph-up"></i> Stocks</a></li>
+                <li><a href="#pnl"><i class="bi bi-cash-stack"></i> PnL Statistics</a></li>
+                <li><a href="#signals"><i class="bi bi-broadcast"></i> Signal Center</a></li>
+                <li><a href="#settings"><i class="bi bi-gear"></i> Settings</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <span>Last Updated: <span id="last-update-time"></span></span>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main id="content" class="content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <h2>Market Overview</h2>
+                        </div>
+                        <div class="d-flex">
+                            <button class="btn btn-dark me-2" id="refresh-btn">
+                                <i class="bi bi-arrow-clockwise"></i> Refresh
+                            </button>
+                            <div class="dropdown">
+                                <button class="btn btn-dark dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" href="#profile">Profile</a></li>
+                                    <li><a class="dropdown-item" href="#preferences">Preferences</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#logout">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Asset Class Overview -->
+            <section class="market-overview">
+                <div class="container-fluid mb-4">
+                    <div class="row asset-tiles">
+                        <div class="col-md-3 mb-3">
+                            <div class="asset-tile" data-asset="SPY">
+                                <h4>S&P 500 (SPY)</h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">459.25</span>
+                                    <span class="change positive">+1.2%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="asset-tile" data-asset="OIL">
+                                <h4>Crude Oil (WTI)</h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">82.35</span>
+                                    <span class="change negative">-0.8%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="asset-tile" data-asset="GOLD">
+                                <h4>Gold</h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">2,327.50</span>
+                                    <span class="change positive">+0.5%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="asset-tile" data-asset="BTCUSD">
+                                <h4>Bitcoin</h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">70,234.12</span>
+                                    <span class="change positive">+2.7%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="asset-tile" data-asset="EURUSD">
+                                <h4>EUR/USD</h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">1.0845</span>
+                                    <span class="change negative">-0.3%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="asset-tile" data-asset="US10Y">
+                                <h4>US 10Y Yield</h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">4.25%</span>
+                                    <span class="change positive">+0.05</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="asset-tile" data-asset="VIX">
+                                <h4>VIX</h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">18.42</span>
+                                    <span class="change negative">-2.1%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="asset-tile" data-asset="DXY">
+                                <h4>Dollar Index</h4>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">103.75</span>
+                                    <span class="change positive">+0.2%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Chart Section -->
+            <section class="main-chart-section">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h3>Crypto vs Traditional Markets</h3>
+                                <div>
+                                    <button class="btn btn-sm btn-secondary time-frame" data-period="1d">1D</button>
+                                    <button class="btn btn-sm btn-secondary time-frame" data-period="1w">1W</button>
+                                    <button class="btn btn-sm btn-secondary time-frame active" data-period="1m">1M</button>
+                                    <button class="btn btn-sm btn-secondary time-frame" data-period="3m">3M</button>
+                                    <button class="btn btn-sm btn-secondary time-frame" data-period="1y">1Y</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-container">
+                                <canvas id="mainChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Market Intelligence -->
+            <section class="ai-intelligence mt-4 mb-4">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="bi bi-robot"></i> AI Market Intelligence</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="ai-memo">
+                                <h4>Market Sentiment Analysis - March 28, 2025</h4>
+                                <div class="sentiment-indicators">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="sentiment-item">
+                                                <h5>Crypto Markets</h5>
+                                                <div class="sentiment-meter bullish">
+                                                    <span>Bullish</span>
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-success" style="width: 75%"></div>
+                                                    </div>
+                                                </div>
+                                                <p>Bitcoin and Ethereum showing strong momentum with key resistance levels cleared. Institutional inflows have increased by 15% this week.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="sentiment-item">
+                                                <h5>Stock Markets</h5>
+                                                <div class="sentiment-meter neutral">
+                                                    <span>Neutral</span>
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-warning" style="width: 55%"></div>
+                                                    </div>
+                                                </div>
+                                                <p>Mixed signals as earnings season approaches. Technology sector remains strong while financials face headwinds from interest rate uncertainties.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="sentiment-item">
+                                                <h5>Forex Markets</h5>
+                                                <div class="sentiment-meter bearish">
+                                                    <span>Slightly Bearish</span>
+                                                    <div class="progress">
+                                                        <div class="progress-bar bg-danger" style="width: 40%"></div>
+                                                    </div>
+                                                </div>
+                                                <p>USD strengthening against major peers as inflation concerns persist. EUR/USD facing pressure from divergent central bank policies.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ai-conclusion mt-3">
+                                        <h5>Strategic Outlook</h5>
+                                        <p>Our regression models indicate a potential decorrelation between crypto and traditional assets in the coming weeks. The BTC-ETH correlation remains strong (0.87), while the BTC-SPY correlation is weakening (0.42 from 0.65). Consider increasing allocation to digital assets while maintaining defensive positioning in equities.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Signal Center with Market News -->
+            <section class="signal-center mt-4">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h3><i class="bi bi-newspaper"></i> Market News & Signals</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="news-feed">
+                                        <div class="news-item high-impact">
+                                            <div class="news-time">09:35 AM</div>
+                                            <div class="news-content">
+                                                <h5>Fed Chair Signals Potential Rate Cut</h5>
+                                                <p>Federal Reserve Chair indicated openness to rate cuts in the upcoming FOMC meeting, citing improved inflation outlook.</p>
+                                                <div class="news-impact">
+                                                    <span class="badge bg-success">SPY +0.8%</span>
+                                                    <span class="badge bg-success">GOLD +0.5%</span>
+                                                    <span class="badge bg-danger">USD -0.3%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="news-item medium-impact">
+                                            <div class="news-time">08:22 AM</div>
+                                            <div class="news-content">
+                                                <h5>Major Tech Acquisition Announced</h5>
+                                                <p>Silicon Valley giant acquires AI startup for $3.5 billion, expanding its machine learning capabilities.</p>
+                                                <div class="news-impact">
+                                                    <span class="badge bg-success">TECH +1.2%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="news-item low-impact">
+                                            <div class="news-time">07:45 AM</div>
+                                            <div class="news-content">
+                                                <h5>Crypto Exchange Enhances Security Measures</h5>
+                                                <p>Leading cryptocurrency exchange announced implementation of advanced security protocols following industry recommendations.</p>
+                                                <div class="news-impact">
+                                                    <span class="badge bg-success">BTC +0.3%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="news-item medium-impact">
+                                            <div class="news-time">Yesterday</div>
+                                            <div class="news-content">
+                                                <h5>Oil Production Agreement Extended</h5>
+                                                <p>OPEC+ members agreed to extend production limits for another three months, supporting crude prices.</p>
+                                                <div class="news-impact">
+                                                    <span class="badge bg-success">OIL +1.5%</span>
+                                                    <span class="badge bg-success">ENERGY +0.7%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h3><i class="bi bi-graph-up-arrow"></i> Active Signals</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="signals-list">
+                                        <div class="signal-item buy">
+                                            <div class="signal-icon">
+                                                <i class="bi bi-arrow-up-circle-fill"></i>
+                                            </div>
+                                            <div class="signal-details">
+                                                <h5>BTC/USD <span class="badge bg-success">BUY</span></h5>
+                                                <p>Regression indicator showing strong upward momentum with RSI divergence</p>
+                                                <div class="signal-meta">
+                                                    <span>Entry: 69,800</span>
+                                                    <span>Target: 73,500</span>
+                                                    <span>Stop: 68,200</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="signal-item sell">
+                                            <div class="signal-icon">
+                                                <i class="bi bi-arrow-down-circle-fill"></i>
+                                            </div>
+                                            <div class="signal-details">
+                                                <h5>EUR/USD <span class="badge bg-danger">SELL</span></h5>
+                                                <p>Breaking below key support with bearish RSI confirmation</p>
+                                                <div class="signal-meta">
+                                                    <span>Entry: 1.0860</span>
+                                                    <span>Target: 1.0780</span>
+                                                    <span>Stop: 1.0890</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="signal-item buy">
+                                            <div class="signal-icon">
+                                                <i class="bi bi-arrow-up-circle-fill"></i>
+                                            </div>
+                                            <div class="signal-details">
+                                                <h5>GOLD <span class="badge bg-success">BUY</span></h5>
+                                                <p>Breakout from consolidation pattern with increasing volume</p>
+                                                <div class="signal-meta">
+                                                    <span>Entry: 2,318</span>
+                                                    <span>Target: 2,360</span>
+                                                    <span>Stop: 2,295</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html><html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Market Overview Dashboard</title>
