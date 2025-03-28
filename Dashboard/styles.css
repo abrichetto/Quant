@@ -72,5 +72,24 @@ body.dark-theme {
     margin: 0;
     flex-grow: 1;
 }
+body {
+    transition: background-color 0.5s, color 0.5s;
+}
 
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+#sidebar {
+    /* Sidebar styling */
+}
+
+#main {
+    /* Main content styling */
+}
+
+canvas {
+    /* Chart styling */
+}
 .
