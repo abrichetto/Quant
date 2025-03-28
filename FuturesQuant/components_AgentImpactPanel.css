@@ -1,0 +1,109 @@
+.agent-impact-panel {
+  margin-bottom: 2rem;
+}
+
+.agent-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.agent-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  padding: 1rem;
+  transition: transform 0.3s;
+}
+
+.agent-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.agent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.agent-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.impact-score {
+  font-weight: bold;
+  font-size: 1.4rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.impact-score.positive {
+  background-color: rgba(46, 204, 113, 0.2);
+  color: #27ae60;
+}
+
+.impact-score.negative {
+  background-color: rgba(231, 76, 60, 0.2);
+  color: #c0392b;
+}
+
+.agent-metrics {
+  margin-bottom: 1rem;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.metric-label {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.metric-value {
+  font-weight: 600;
+}
+
+.metric-value.positive {
+  color: #27ae60;
+}
+
+.metric-value.negative {
+  color: #c0392b;
+}
+
+.agent-recent h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.decision-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.decision-list li {
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.decision-list li.positive {
+  background-color: rgba(46, 204, 113, 0.1);
+  border-left: 3px solid #27ae60;
+}
+
+.decision-list li.negative {
+  background-color: rgba(231, 76, 60, 0.1);
+  border-left: 3px solid #c0392b;
+}
