@@ -1,0 +1,88 @@
+# Indicators Library
+
+This directory contains a collection of trading indicators used in the **AlgoTrader Pro** project. These indicators are designed to provide actionable insights and automate trading strategies. Each indicator is documented with its purpose, features, and usage instructions.
+
+---
+
+## **Table of Contents**
+1. [Turtle Trading Rules Indicator](#turtle-trading-rules-indicator)
+2. [Custom MACD Indicator](#custom-macd-indicator)
+3. [Moneyball Indicator](#moneyball-indicator)
+4. [Sharpe Ratio Indicator](#sharpe-ratio-indicator)
+
+---
+
+## **1. Turtle Trading Rules Indicator**
+- **File**: `Indicators/turtle_trading_rules.pine`
+- **Description**: Implements Turtle Trading breakout rules with entry/exit signals and OKX bot alerts.
+- **Features**:
+  - Entry/Exit signals based on breakout levels.
+  - Integration with OKX Signal Bot for automated alerts.
+  - Configurable parameters for order type, investment type, and amount.
+- **Use Case**: Suitable for trend-following strategies and automated trading systems.
+- **Platform**: TradingView (Pine Script v5).
+
+---
+
+## **2. Custom MACD Indicator**
+- **File**: `Indicators/custom_macd.js`
+- **Description**: A modified version of the Moving Average Convergence Divergence (MACD) indicator.
+- **Features**:
+  - Calculates the MACD Line, Signal Line, and Histogram.
+  - Configurable short, long, and signal periods.
+  - Can be integrated into dashboards or used for automated trading signals.
+- **Use Case**: Identifies trend reversals and momentum shifts.
+- **Platform**: JavaScript (for integration with AlgoTrader Pro).
+
+---
+
+## **3. Moneyball Indicator**
+- **File**: `Indicators/moneyball_indicator.js`
+- **Description**: A custom indicator inspired by the Moneyball concept, focusing on trade efficiency and risk-adjusted returns.
+- **Features**:
+  - Calculates Win Rate, Risk-Adjusted Return, and Trade Efficiency.
+  - Provides actionable metrics for evaluating trading performance.
+- **Use Case**: Optimizes trading strategies by analyzing historical trade data.
+- **Platform**: JavaScript (for integration with AlgoTrader Pro).
+
+---
+
+## **4. Sharpe Ratio Indicator**
+- **File**: `Indicators/sharpe_ratio.js`
+- **Description**: Calculates the Sharpe Ratio to measure risk-adjusted returns.
+- **Features**:
+  - Uses historical returns and a configurable risk-free rate.
+  - Provides insights into the performance of trading strategies.
+- **Use Case**: Evaluates the profitability of strategies relative to their risk.
+- **Platform**: JavaScript (for integration with AlgoTrader Pro).
+
+---
+
+## **How to Use**
+1. **For TradingView Indicators**:
+   - Copy the `.pine` script into the Pine Script editor on TradingView.
+   - Save and apply it to your chart.
+   - Configure the inputs as needed.
+
+2. **For JavaScript Indicators**:
+   - Import the indicator into your AlgoTrader Pro project.
+   - Use it in conjunction with the scraper, metrics module, or dashboard.
+
+---
+
+## **Future Additions**
+- **RSI Divergence Indicator**: Detects divergences between price and RSI.
+- **Bollinger Bands Strategy**: Implements Bollinger Bands for volatility-based trading.
+- **Volume Profile Analysis**: Analyzes volume distribution across price levels.
+
+---
+
+## **Contribution Guidelines**
+1. Add new indicators to the `Indicators` directory.
+2. Update this `README.md` with the new indicator's details.
+3. Ensure the indicator is tested and documented before committing.
+
+---
+
+## **License**
+This library is part of the **AlgoTrader Pro** project and is licensed under the MIT License. See the main project repository for more details.
