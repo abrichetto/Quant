@@ -1,0 +1,76 @@
+:root {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --bg-tertiary: #252525;
+    --text-primary: #f8f9fa;
+    --text-secondary: #adb5bd;
+    --accent-primary: #7057ff;
+    --accent-secondary: #53cbc9;
+    --accent-tertiary: #6c757d;
+    --border-color: #2d2d2d;
+    --card-bg: #1c1c1c;
+    --chart-grid: #333;
+    --positive: #00c853;
+    --negative: #ff5252;
+    --neutral: #ffab40;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    height: 100%;
+}
+
+body.dark-theme {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background-color: var(--bg-secondary);
+    height: 100%;
+    position: fixed;
+    transition: all 0.3s;
+    border-right: 1px solid var(--border-color);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    color: var(--accent-secondary);
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.
