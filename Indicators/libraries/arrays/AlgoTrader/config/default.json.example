@@ -1,0 +1,42 @@
+{
+  "server": {
+    "port": 2325
+  },
+  "platform": "intentx",
+  "platforms": {
+    "intentx": {
+      "apiKey": "your-intentx-api-key",
+      "apiSecret": "your-intentx-api-secret"
+    },
+    "apollox": {
+      "apiKey": "your-apollox-api-key",
+      "apiSecret": "your-apollox-api-secret"
+    }
+  },
+  "strategies": {
+    "tradingview": {
+      "webhookUrl": "your-tradingview-webhook-url",
+      "apiKey": "your-tradingview-api-key"
+    }
+  },
+  "ocr": {
+    "language": "eng",
+    "confidenceThreshold": 50
+  },
+  "logging": {
+    "level": "info",
+    "file": "logs/algotrade.log"
+  },
+  "newsParser": {
+    "apiKey": "your-news-api-key",our-news-api-key",
+    "apiUrl": "https://newsapi.org/v2/everything?q=crypto",
+    "sources": [
+      { "name": "Bloomberg", "apiUrl": "https://api.bloomberg.com/v2/news", "apiKey": "your-bloomberg-api-key", "weight": 5 },
+      { "name": "Reuters", "apiUrl": "https://api.reuters.com/v2/news", "apiKey": "your-reuters-api-key", "weight": 4 },
+      { "name": "CNBC", "apiUrl": "https://api.cnbc.com/v2/news", "apiKey": "your-cnbc-api-key", "weight": 3 },
+      { "name": "Financial Times", "apiUrl": "https://api.ft.com/v2/news", "apiKey": "your-ft-api-key", "weight": 5 },
+      { "name": "Wall Street Journal", "apiUrl": "https://api.wsj.com/v2/news", "apiKey": "your-wsj-api-key", "weight": 5 },      { "name": "Yahoo Finance", "apiUrl": "https://api.yahoofinance.com/v2/news", "apiKey": "your-yahoo-api-key", "weight": 3 },      { "name": "MarketWatch", "apiUrl": "https://api.marketwatch.com/v2/news", "apiKey": "your-marketwatch-api-key", "weight": 3 },      { "name": "CoinDesk", "apiUrl": "https://api.coindesk.com/v2/news", "apiKey": "your-coindesk-api-key", "weight": 4 },      { "name": "CryptoSlate", "apiUrl": "https://api.cryptoslate.com/v2/news", "apiKey": "your-cryptoslate-api-key", "weight": 3 },      { "name": "The Block", "apiUrl": "https://api.theblock.com/v2/news", "apiKey": "your-theblock-api-key", "weight": 4 },      { "name": "Decrypt", "apiUrl": "https://api.decrypt.co/v2/news", "apiKey": "your-decrypt-api-key", "weight": 3 },      { "name": "Forbes", "apiUrl": "https://api.forbes.com/v2/news", "apiKey": "your-forbes-api-key", "weight": 4 },      { "name": "Business Insider", "apiUrl": "https://api.businessinsider.com/v2/news", "apiKey": "your-businessinsider-api-key", "weight": 3 },      { "name": "The Economist", "apiUrl": "https://api.economist.com/v2/news", "apiKey": "your-economist-api-key", "weight": 5 },      { "name": "Investopedia", "apiUrl": "https://api.investopedia.com/v2/news", "apiKey": "your-investopedia-api-key", "weight": 3 },      { "name": "Crypto Briefing", "apiUrl": "https://api.cryptobriefing.com/v2/news", "apiKey": "your-cryptobriefing-api-key", "weight": 3 },      { "name": "Bitcoin Magazine", "apiUrl": "https://api.bitcoinmagazine.com/v2/news", "apiKey": "your-bitcoinmagazine-api-key", "weight": 4 },      { "name": "Nasdaq", "apiUrl": "https://api.nasdaq.com/v2/news", "apiKey": "your-nasdaq-api-key", "weight": 4 },      { "name": "Seeking Alpha", "apiUrl": "https://api.seekingalpha.com/v2/news", "apiKey": "your-seekingalpha-api-key", "weight": 4 },      { "name": "CryptoCompare", "apiUrl": "https://api.cryptocompare.com/v2/news", "apiKey": "your-cryptocompare-api-key", "weight": 3 }    ]  },
+  "riskManager": {
+    "maxLeverage": 10
+  }
+}

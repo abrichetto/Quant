@@ -1,0 +1,198 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #ffffff;
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+.options-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 24px;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Dashboard Section */
+.dashboard-section {
+  margin-bottom: 20px;
+}
+
+.dashboard-metrics {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.metric {
+  flex: 1;
+  background-color: #2a2a2a;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.metric h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.metric p {
+  font-size: 18px;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+/* Trading Signals Section */
+.signals-section {
+  margin-bottom: 20px;
+}
+
+.signals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.signal {
+  background-color: #2a2a2a;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.signal p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Settings Section */
+.settings-section {
+  margin-bottom: 20px;
+}
+
+.setting-item {
+  margin-bottom: 15px;
+}
+
+.setting-item label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.setting-item input,
+.setting-item select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+
+.setting-item input[type="checkbox"] {
+  width: auto;
+}
+
+/* Switch Style */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+/* Buttons */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.primary-btn {
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.primary-btn:hover {
+  background-color: #45a049;
+}
+
+.btn:not(.primary-btn) {
+  background-color: #444;
+  color: #ffffff;
+}
+
+.btn:not(.primary-btn):hover {
+  background-color: #555;
+}

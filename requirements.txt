@@ -1,0 +1,4 @@
+pandas
+python-dotenv
+polygon-api-client
+requests

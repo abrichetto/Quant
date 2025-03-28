@@ -1,0 +1,9 @@
+export class Logger {
+  public info(message: string): void {
+    console.log(`INFO: ${message}`);
+  }
+
+  public error(message: string): void {
+    console.error(`ERROR: ${message}`);
+  }
+}

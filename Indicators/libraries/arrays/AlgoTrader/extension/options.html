@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlgoTrader Pro Settings</title>
+  <link rel="stylesheet" href="css/options.css">
+</head>
+<body class="dark-mode">
+  <div class="options-container">
+    <div class="header">
+      <h1>AlgoTrader Pro Dashboard</h1>
+    </div>
+
+    <!-- Connection Settings Section -->
+    <div class="settings-section">
+      <h2>Connection Settings</h2>
+      <div class="setting-item">
+        <label for="wss://localhost:5010">WebSocket URL:</label>
+        <input type="text" id="websocket-url" value="wss://localhost:5010" placeholder="Enter WebSocket URL">
+      </div>
+      <div class="action-buttons">
+        <button id="connect-btn" class="btn primary-btn">Connect</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/options.js"></script>
+</body>
+</html>

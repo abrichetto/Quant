@@ -1,0 +1,1 @@
+{"version":3,"file":"signalAgent.d.ts","sourceRoot":"","sources":["../../config/signalAgent.ts"],"names":[],"mappings":"AAmBA,UAAU,iBAAiB;IACzB,OAAO,EAAE,KAAK,CAAC;QACb,IAAI,EAAE,MAAM,CAAC;QACb,MAAM,EAAE,MAAM,CAAC;QACf,MAAM,EAAE,MAAM,CAAC;KAChB,CAAC,CAAC;CACJ;AAED,cAAM,WAAW;;gBAIH,MAAM,EAAE,iBAAiB;IA6G/B,OAAO,IAAI,OAAO,CAAC,IAAI,CAAC;CAwB/B;AAED,eAAe,WAAW,CAAC"}

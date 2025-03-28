@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlgoTrader Pro Assistant</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 10px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input, button {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Connection Settings</h1>
+  <label for="webSocketURL">WebSocket URL:</label>
+  <input type="text" id="webSocketURL" value="http://localhost:5010" disabled />
+
+  <label for="autoConnect">Auto Connect:</label>
+  <input type="checkbox" id="autoConnect" checked disabled />
+
+  <label for="maxReconnectAttempts">Max Reconnect Attempts:</label>
+  <input type="number" id="maxReconnectAttempts" value="1" disabled />
+
+  <button id="connectButton">Connect</button>
+  <div id="status"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

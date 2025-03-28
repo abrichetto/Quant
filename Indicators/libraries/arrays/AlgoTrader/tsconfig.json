@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    // Language and Environment
+    "target": "es6", // Modern JavaScript target
+    "lib": ["ES6", "DOM"], // Include ES6 and DOM libraries
+    "module": "commonjs", // Node.js module system
+    
+    // Strict Type Checking
+    "strict": true, // Enable all strict type-checking options
+    "noImplicitAny": true, // Disallow variables with an implicit `any` type
+    "strictNullChecks": true, // Ensure null and undefined are handled explicitly
+    "strictBindCallApply": true, // Check argument types in `bind`, `call`, and `apply`
+    "noImplicitThis": true, // Ensure `this` is typed correctly
+    "alwaysStrict": true, // Parse in strict mode and emit `"use strict"`
+
+    // Module Resolution
+    "moduleResolution": "node", // Use Node.js module resolution
+    "esModuleInterop": true, // Enable compatibility with CommonJS and ES modules
+    "resolveJsonModule": true, // Allow importing JSON files
+
+    // Output Configuration
+    "outDir": "./dist", // Output directory for compiled files
+    "baseUrl": "./", // Base directory for module resolution
+    "paths": {
+      "utils/*": ["utils/*"],
+      "services/*": ["src/services/*"],
+      "agents/*": ["src/agents/*"]
+    },
+
+    // Additional Checks
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "forceConsistentCasingInFileNames": true, // Enforce consistent file name casing
+    "sourceMap": true, // Generate source maps for debugging
+    "declaration": true, // Generate `.d.ts` declaration files
+    "declarationMap": true, // Generate source maps for declaration files
+    "removeComments": true // Remove comments in the output files
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
