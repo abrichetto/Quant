@@ -93,3 +93,257 @@ canvas {
     /* Chart styling */
 }
 .
+
+/* Trading Section Styles */
+.trading-section {
+    margin-bottom: 2rem;
+}
+
+.trading-form {
+    padding: 1rem;
+}
+
+.balance-item {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+}
+
+.balance-item h5 {
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.balance-item p {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+#place-order-btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.form-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.form-select, .form-control {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.form-select:focus, .form-control:focus {
+    background-color: var(--input-bg);
+    border-color: var(--primary-color);
+    color: var(--text-primary);
+    box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.25);
+}
+
+/* Account Overview Card */
+.account-balance {
+    padding: 1rem;
+}
+
+.account-balance .balance-item {
+    transition: transform 0.2s ease;
+}
+
+.account-balance .balance-item:hover {
+    transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .trading-form {
+        padding: 0.5rem;
+    }
+    
+    .balance-item {
+        padding: 0.75rem;
+    }
+}
+
+/* CodeGPT Styles */
+.codegpt-floating {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.codegpt-toggle {
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.codegpt-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.codegpt-toggle i {
+    margin-right: 0.5rem;
+}
+
+.codegpt-minimized {
+    position: fixed;
+    bottom: 5rem;
+    right: 2rem;
+    width: 400px;
+    height: 600px;
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    display: none;
+    flex-direction: column;
+    z-index: 999;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.codegpt-minimized.active {
+    display: flex;
+    animation: slideUp 0.3s ease;
+}
+
+.codegpt-header {
+    padding: 1rem;
+    background-color: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.codegpt-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--accent-secondary);
+}
+
+.codegpt-header button {
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.codegpt-header button:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.codegpt-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    background-color: var(--bg-secondary);
+}
+
+.message {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    max-width: 85%;
+    font-size: 0.9rem;
+}
+
+.message.user {
+    background-color: var(--accent-primary);
+    color: white;
+    margin-left: auto;
+}
+
+.message.assistant {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    margin-right: auto;
+}
+
+.message pre {
+    background-color: var(--bg-primary);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 0.5rem 0;
+    font-size: 0.85rem;
+}
+
+.chat-input {
+    padding: 1rem;
+    background-color: var(--bg-tertiary);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 0.5rem;
+}
+
+.chat-input textarea {
+    flex-grow: 1;
+    resize: none;
+    height: 40px;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.chat-input textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(112, 87, 255, 0.2);
+}
+
+.chat-input button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .codegpt-minimized {
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        right: 0;
+        border-radius: 0;
+    }
+    
+    .codegpt-floating {
+        bottom: 1rem;
+        right: 1rem;
+    }
+}

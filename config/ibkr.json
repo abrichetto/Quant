@@ -1,0 +1,27 @@
+{
+    "host": "127.0.0.1",
+    "port": 7496,
+    "clientId": 0,
+    "readOnly": true,
+    "symbols": {
+        "ES": {
+            "exchange": "CME",
+            "currency": "USD",
+            "expiry": "20240621"
+        },
+        "NQ": {
+            "exchange": "CME",
+            "currency": "USD",
+            "expiry": "20240621"
+        },
+        "CL": {
+            "exchange": "NYMEX",
+            "currency": "USD",
+            "expiry": "20240621"
+        }
+    },
+    "orderDefaults": {
+        "timeInForce": "DAY",
+        "transmit": true
+    }
+} 

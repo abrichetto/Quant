@@ -11,6 +11,7 @@ from indicators.supertrend_ai import SuperTrendAI
 from indicators.supertrend import SuperTrend
 from indicators.scalping import Scalping
 from indicators.mlmi import MLMI
+from indicators.cross_correlation_pair import CrossCorrelationPair
 
 def calculate_atr(high, low, close, period=14):
     tr = np.maximum(high - low, np.maximum(abs(high - close.shift(1)), abs(low - close.shift(1))))
@@ -51,6 +52,7 @@ class IndicatorManager:
             "SuperTrend": SuperTrend(),
             "Scalping": Scalping(),
             "MLMI": MLMI(),
+            "CrossCorrelationPair": CrossCorrelationPair(),
         }
 
     def get_indicator(self, name):

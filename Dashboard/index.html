@@ -28,6 +28,7 @@
                 <li><a href="#stocks"><i class="bi bi-graph-up"></i> Stocks</a></li>
                 <li><a href="#pnl"><i class="bi bi-cash-stack"></i> PnL Statistics</a></li>
                 <li><a href="#signals"><i class="bi bi-broadcast"></i> Signal Center</a></li>
+                <li><a href="#codegpt"><i class="bi bi-robot"></i> CodeGPT</a></li>
                 <li><a href="#settings"><i class="bi bi-gear"></i> Settings</a></li>
             </ul>
             <div class="sidebar-footer">
@@ -63,6 +64,36 @@
                     </div>
                 </div>
             </header>
+
+            <!-- CodeGPT Floating Button -->
+            <div class="codegpt-floating">
+                <button class="btn btn-primary codegpt-toggle" id="codegpt-toggle">
+                    <i class="bi bi-robot"></i>
+                    <span>CodeGPT</span>
+                </button>
+            </div>
+
+            <!-- CodeGPT Minimized Interface -->
+            <div class="codegpt-minimized" id="codegpt-minimized">
+                <div class="codegpt-header">
+                    <h3><i class="bi bi-robot"></i> CodeGPT</h3>
+                    <button class="btn btn-link" id="codegpt-close">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div class="codegpt-content">
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- Messages will be added here -->
+                    </div>
+                    <div class="chat-input">
+                        <textarea class="form-control" id="codegpt-input" 
+                            placeholder="Ask me anything..."></textarea>
+                        <button class="btn btn-primary" id="send-message">
+                            <i class="bi bi-send"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
             <!-- Asset Class Overview -->
             <section class="market-overview">
@@ -343,16 +374,138 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Trading Section -->
+            <section class="trading-section mt-4">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h3><i class="bi bi-graph-up-arrow"></i> Trading Panel</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="trading-interface">
+                                        <div class="trading-form">
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Symbol</label>
+                                                    <select class="form-select" id="trading-symbol">
+                                                        <option value="BTC-USDT">BTC/USDT</option>
+                                                        <option value="ETH-USDT">ETH/USDT</option>
+                                                        <option value="SOL-USDT">SOL/USDT</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Correlated Symbol</label>
+                                                    <select class="form-select" id="correlated-symbol">
+                                                        <option value="ETH-USDT">ETH/USDT</option>
+                                                        <option value="BTC-USDT">BTC/USDT</option>
+                                                        <option value="SOL-USDT">SOL/USDT</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Order Type</label>
+                                                    <select class="form-select" id="order-type">
+                                                        <option value="LIMIT">Limit Order</option>
+                                                        <option value="MARKET">Market Order</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Strategy</label>
+                                                    <select class="form-select" id="trading-strategy">
+                                                        <option value="supertrend-ai">SuperTrend AI</option>
+                                                        <option value="cross-correlation">Cross Correlation Pair</option>
+                                                        <option value="mlmi">MLMI</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Side</label>
+                                                    <select class="form-select" id="order-side">
+                                                        <option value="BUY">Buy</option>
+                                                        <option value="SELL">Sell</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Amount</label>
+                                                    <input type="number" class="form-control" id="order-amount" step="0.0001">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3" id="limit-price-row">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">Price</label>
+                                                    <input type="number" class="form-control" id="order-price" step="0.01">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <button class="btn btn-primary" id="place-order-btn">Place Order</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="market-data">
+                                            <div id="newsDashboard" class="news-dashboard-container"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h3><i class="bi bi-wallet2"></i> Account Overview</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="account-balance">
+                                        <div class="balance-item">
+                                            <h5>Total Balance</h5>
+                                            <p id="total-balance">Loading...</p>
+                                        </div>
+                                        <div class="balance-item">
+                                            <h5>Available Balance</h5>
+                                            <p id="available-balance">Loading...</p>
+                                        </div>
+                                        <div class="balance-item">
+                                            <h5>Open Positions</h5>
+                                            <p id="open-positions">Loading...</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/trading.js"></script>
     <script src="app.js"></script>
+    <script src="../node_modules/chart.js/dist/chart.umd.js"></script>
+    <script src="../src/execution/news_handler.js"></script>
+    <script src="../src/visualization/news_dashboard.js"></script>
+    <script>
+        // Initialize news handler and dashboard
+        const newsHandler = new NewsHandler({ ibkr: ibkrClient });
+        const newsDashboard = new NewsDashboard('newsDashboard', newsHandler);
+        newsDashboard.addStyles();
+
+        // Subscribe to news for the selected symbol
+        function updateNewsSubscription(symbol) {
+            newsHandler.unsubscribeAll();
+            newsHandler.subscribeToNews(symbol);
+        }
+
+        // Update news subscription when symbol changes
+        document.getElementById('symbol').addEventListener('change', (e) => {
+            updateNewsSubscription(e.target.value);
+        });
+    </script>
 </body>
 
-</html><html lang="en">
-<head>
-
-
-</body>
 </html>
