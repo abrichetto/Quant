@@ -20,7 +20,11 @@ const Dashboard = () => {
     
     // Set up real-time updates
     const tradesInterval = setInterval(fetchTrades, 30000);
-    return () => clearInterval(tradesInterval);
+    const indicatorsInterval = setInterval(fetchIndicatorData, 5000);
+    return () => {
+      clearInterval(tradesInterval);
+      clearInterval(indicatorsInterval);
+    };
   }, []);
   
   const fetchTrades = async () => {
@@ -41,6 +45,34 @@ const Dashboard = () => {
       setAgents(data);
     } catch (error) {
       console.error('Error fetching agents:', error);
+    }
+  };
+
+  const fetchIndicatorData = async () => {
+    try {
+      const response = await fetch('/api/indicators');
+      const data = await response.json();
+      updateDashboard(data);
+    } catch (error) {
+      console.error('Error fetching indicators:', error);
+    }
+  };
+
+  const updateDashboard = (data) => {
+    const dashboard = document.getElementById('dashboard');
+    if (dashboard) {
+      dashboard.innerHTML = '';
+  
+      data.forEach(indicator => {
+        const row = document.createElement('div');
+        row.className = 'dashboard-row';
+        row.innerHTML = `
+          <div>${indicator.name}</div>
+          <div>${indicator.signal}</div>
+          <div>${indicator.confidence}</div>
+        `;
+        dashboard.appendChild(row);
+      });
     }
   };
   
@@ -76,7 +108,7 @@ const Dashboard = () => {
         </div>
       </header>
       
-      <main className="dashboard-content">
+      <main className="dashboard-content" id="dashboard">
         {activeTab === 'overview' && (
           <div className="overview-tab">
             <div className="agent-decision-section">

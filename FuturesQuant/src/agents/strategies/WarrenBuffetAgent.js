@@ -6,6 +6,7 @@
  */
 
 const SignalAgent = require('../base/SignalAgent');
+const IndicatorManager = require('../../core/indicator/manager');
 
 class WarrenBuffetAgent extends SignalAgent {
   constructor(config = {}) {
@@ -13,6 +14,7 @@ class WarrenBuffetAgent extends SignalAgent {
     this.marginOfSafety = config.marginOfSafety || 0.3; // 30% discount to intrinsic value
     this.minimumMoat = config.minimumMoat || 0.6;       // Economic moat threshold
     this.longTermFocus = config.longTermFocus || true;  // Focus on long-term investments
+    this.indicatorManager = new IndicatorManager();
   }
   
   async initialize() {
@@ -168,6 +170,23 @@ class WarrenBuffetAgent extends SignalAgent {
         costAdvantages: 0.4
       }
     ];
+  }
+
+  /**
+   * Decides trade action based on indicator signals
+   * @param {Object} data - Market data for decision making
+   * @returns {Object} Trade decision with action and confidence
+   */
+  async decideTrade(data) {
+    const scalpingSignal = this.indicatorManager.calculate("Scalping", data);
+    const superTrendAISignal = this.indicatorManager.calculate("SuperTrendAI", data);
+
+    if (scalpingSignal === "Reversal" && superTrendAISignal === "BUY") {
+      return { action: "BUY", confidence: 0.8 };
+    } else if (scalpingSignal === "Reversal" && superTrendAISignal === "SELL") {
+      return { action: "SELL", confidence: 0.8 };
+    }
+    return { action: "HOLD", confidence: 0 };
   }
 }
 

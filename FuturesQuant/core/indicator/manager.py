@@ -7,6 +7,28 @@ import pandas as pd
 import numpy as np
 from typing import Dict, List, Callable, Any
 import logging
+from indicators.supertrend_ai import SuperTrendAI
+from indicators.supertrend import SuperTrend
+from indicators.scalping import Scalping
+from indicators.mlmi import MLMI
+
+def calculate_atr(high, low, close, period=14):
+    tr = np.maximum(high - low, np.maximum(abs(high - close.shift(1)), abs(low - close.shift(1))))
+    atr = tr.rolling(window=period).mean()
+    return atr
+
+def calculate_rsi(close, period=14):
+    delta = close.diff()
+    gain = (delta.where(delta > 0, 0)).rolling(window=period).mean()
+    loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
+    rs = gain / loss
+    rsi = 100 - (100 / (1 + rs))
+    return rsi
+
+def knn_predict(data, target, k=5):
+    distances = np.linalg.norm(data - target, axis=1)
+    nearest_indices = distances.argsort()[:k]
+    return np.mean(nearest_indices)
 
 class Indicator:
     """Base class for all technical indicators"""
@@ -23,43 +45,22 @@ class Indicator:
         return f"{self.name} ({', '.join([f'{k}={v}' for k, v in self.params.items()])})"
 
 class IndicatorManager:
-    """
-    Manages all indicators available to portfolio managers.
-    Ensures all strategies have access to the same indicators.
-    """
-    
     def __init__(self):
-        self.indicators: Dict[str, Indicator] = {}
-        self.logger = logging.getLogger("IndicatorManager")
-        
-    def register_indicator(self, indicator: Indicator) -> bool:
-        """Register a new indicator"""
-        indicator_id = f"{indicator.name}_{hash(frozenset(indicator.params.items()))}"
-        if indicator_id in self.indicators:
-            self.logger.warning(f"Indicator {indicator_id} already registered")
-            return False
-            
-        self.indicators[indicator_id] = indicator
-        self.logger.info(f"Registered indicator: {indicator}")
-        return True
-        
-    def get_indicator(self, name: str, params: Dict[str, Any] = None) -> Indicator:
-        """Get an indicator by name and parameters"""
-        params = params or {}
-        indicator_id = f"{name}_{hash(frozenset(params.items()))}"
-        
-        if indicator_id not in self.indicators:
-            self.logger.error(f"Indicator {indicator_id} not found")
-            raise KeyError(f"Indicator {name} with params {params} not registered")
-            
-        return self.indicators[indicator_id]
-        
-    def calculate_all(self, data: pd.DataFrame) -> Dict[str, pd.Series]:
-        """Calculate all indicators for the given data"""
-        results = {}
-        for indicator_id, indicator in self.indicators.items():
-            results[indicator_id] = indicator.calculate(data)
-        return results
+        self.indicators = {
+            "SuperTrendAI": SuperTrendAI(),
+            "SuperTrend": SuperTrend(),
+            "Scalping": Scalping(),
+            "MLMI": MLMI(),
+        }
+
+    def get_indicator(self, name):
+        return self.indicators.get(name)
+
+    def calculate(self, name, data):
+        indicator = self.get_indicator(name)
+        if indicator:
+            return indicator.calculate(data)
+        raise ValueError(f"Indicator {name} not found")
 
 
 # Common technical indicators

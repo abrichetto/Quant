@@ -6,6 +6,7 @@
  */
 
 const SignalAgent = require('../base/SignalAgent');
+const IndicatorManager = require('../../core/indicator/manager');
 
 class CathyWoodAgent extends SignalAgent {
   constructor(config = {}) {
@@ -19,6 +20,7 @@ class CathyWoodAgent extends SignalAgent {
     ];
     this.innovationThreshold = config.innovationThreshold || 0.7;
     this.growthEmphasis = config.growthEmphasis || 0.8;
+    this.indicatorManager = new IndicatorManager();
   }
   
   async initialize() {
@@ -112,6 +114,41 @@ class CathyWoodAgent extends SignalAgent {
       }
     ];
   }
+
+  /**
+   * Decides trade action based on indicator signals
+   * @param {Object} data - Market data for analysis
+   * @returns {Object} Trade decision
+   */
+  async decideTrade(data) {
+    const superTrendSignal = this.indicatorManager.calculate("SuperTrend", data);
+    const mlmiSignal = this.indicatorManager.calculate("MLMI", data);
+
+    if (superTrendSignal === "BUY" && mlmiSignal > 0) {
+      return { action: "BUY", confidence: mlmiSignal };
+    } else if (superTrendSignal === "SELL" && mlmiSignal < 0) {
+      return { action: "SELL", confidence: Math.abs(mlmiSignal) };
+    }
+    return { action: "HOLD", confidence: 0 };
+  }
 }
 
-module.exports = CathyWoodAgent;
+class WarrenBuffetAgent {
+    constructor() {
+        this.indicatorManager = new IndicatorManager();
+    }
+
+    async decideTrade(data) {
+        const scalpingSignal = this.indicatorManager.calculate("Scalping", data);
+        const superTrendAISignal = this.indicatorManager.calculate("SuperTrendAI", data);
+
+        if (scalpingSignal === "Reversal" && superTrendAISignal === "BUY") {
+            return { action: "BUY", confidence: 0.8 };
+        } else if (scalpingSignal === "Reversal" && superTrendAISignal === "SELL") {
+            return { action: "SELL", confidence: 0.8 };
+        }
+        return { action: "HOLD", confidence: 0 };
+    }
+}
+
+module.exports = { CathyWoodAgent, WarrenBuffetAgent };

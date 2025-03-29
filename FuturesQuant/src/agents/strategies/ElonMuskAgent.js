@@ -4,7 +4,7 @@
  * Emulates Elon Musk's investment strategy focusing on high-risk, high-reward altcoins.
  */
 
-const SignalAgent = require('../base/SignalAgent');
+import SignalAgent from '../base/SignalAgent';
 
 class ElonMuskAgent extends SignalAgent {
   constructor(config = {}) {
@@ -110,7 +110,7 @@ class ElonMuskAgent extends SignalAgent {
         priceChange: 0.20
       }
     ];
-  }
+    // Removed duplicate and unused ElonMuskAgent class definition
 }
 
-module.exports = ElonMuskAgent;
+module.exports = ElonMuskAgent;export default ElonMuskAgent;
